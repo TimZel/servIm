@@ -75,7 +75,7 @@ public class servImage {
                     System.out.println("Йок-макарёк, файла-та и нет: " + ex);//шуткую, если файла нет
                     String notFound =
                             "HTTP/1.0 404 Not Found\r\n" +
-                                    "Content-type: text/html\r\n" +
+                                    "Content-Type: text/html\r\n" +
                                     "\r\n";
                     out.write(notFound.getBytes());
                 }
