@@ -21,9 +21,7 @@ public class servImage {
     public static void main(String[] args) throws IOException {
 
         int visit = 0;
-        String filePath = "";
-        String exeType = "";
-        String contentType = "";
+       
         ServerSocket servsock = new ServerSocket(12000);//серверсокет с указанным портом
         //паттернs
         do {
@@ -32,12 +30,14 @@ public class servImage {
                  var out = new DataOutputStream(socket.getOutputStream()) ) //вывожу поток
             {
                 String request = isr.readLine();//считываю входящую инфу
+                String filePath = "";
+                String exeType = "";
                 Matcher matcher = pattern.matcher(request);//создаю объект matcher типа Matcher на основе поступившей от клиента информации
                 if (matcher.find()) {
                     filePath = matcher.group(0);//сохраняю путь
                     exeType = matcher.group(2);
                 }
-                contentType = mapContentType.get(exeType);
+                String contentType = mapContentType.get(exeType);
                 System.out.println("Client " + (++visit) + " accepted.");//информирую об обращении клиента
                 File file = new File(filePath);//создаю файл  и передаю в него полученный путь
                 try (var inF = new FileInputStream(file)) { //открываю поток для чтения файла
